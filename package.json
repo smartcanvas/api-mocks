@@ -1,0 +1,22 @@
+{
+  "name": "api-mocks",
+  "version": "1.0.0",
+  "description": "Application that emulates Smart Canvas APIs for testing purposes",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smartcanvas/api-mocks"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smartcanvas/api-mocks/issues"
+  },
+  "homepage": "https://github.com/smartcanvas/api-mocks",
+  "dependencies": {
+    "express": "^4.13.1"
+  }
+}
