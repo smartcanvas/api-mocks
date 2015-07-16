@@ -28,45 +28,20 @@ app.use(errorHandler.validateTenantId);
 var topics = require('./routes/topics');
 app.use('/topic', topics);
 
+// generic error handlers
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    return res.json(404, { "code": 404, "message": ""})
-    var err = new Error('Not Found: ' + req.url);
-    err.status = 404;
-    next(err);
+    return res.status(404).json(errorHandler.buildBasicErrorMessage( 404, 'Not Found: ' + req.url ))
 });
 
-// error handlers
-
-// development error handler
-// will print stacktrace
-/*
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
-*/
-
-// production error handler
-// no stacktraces leaked to user
-/*
+// error 500: something went wrong
 app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
+    return res.status(500).json(errorHandler.buildBasicErrorMessage( 500, err.message ));
 });
-*/
 
+// initializes the server on port 3000
 var server = app.listen(3000, function () {
     var port = server.address().port;
-
     console.log('API Mocks listening at %s', port);
 });
 

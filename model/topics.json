@@ -1,0 +1,23 @@
+[
+  {
+    "id": "cinema",
+    "name": "Cinema",
+    "locale": "pt-br",
+    "type": "explicit",
+    "categories": [
+      "movie",
+      "cinema",
+      "diversao"
+    ]
+  },
+  {
+    "id": "lojas",
+    "name": "Lojas",
+    "locale": "pt-br",
+    "type": "explicit",
+    "categories": [
+      "lojas",
+      "compras"
+    ]
+  }
+]

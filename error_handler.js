@@ -24,7 +24,7 @@ errorHandler.buildBasicErrorMessage = function( errorCode, message ) {
  * @param fields Fields with errors
  * @returns {string} The Basic Error JSON string
  */
-errorHandler.buildBasicErrorMessage = function( errorCode, message, fields ) {
+errorHandler.buildErrorWithFieldsMessage = function( errorCode, message, fields ) {
     return { "code": errorCode, "message": message, "fields": fields };
 }
 
@@ -62,5 +62,4 @@ errorHandler.validateTenantId = function( req, res, next ) {
     } else {
         next();
     }
-
 }
