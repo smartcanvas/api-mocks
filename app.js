@@ -1,23 +1,36 @@
+// Module dependencies
 var express = require('express');
 var path = require('path');
-//var logger = require('morgan');
-//var bodyParser = require('body-parser');
+var morgan = require('morgan');
+var FileStreamRotator = require('file-stream-rotator');
+var fs = require('fs');
+var errorHandler = require('./error_handler');
 
-var routes = require('./routes/index');
-var topics = require('./routes/topics');
-
+// Initialize the Express framework
 var app = express();
 
-//app.use(logger('dev'));
-//app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({ extended: false }));
+// Morgan configuration: logs all the requests
+var logDirectory = __dirname + '/log';
+fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory); // make sure dir exists
+var accessLogStream = FileStreamRotator.getStream({
+    filename: logDirectory + '/access-%DATE%.log',
+    frequency: 'daily',
+    verbose: false
+});
+app.use(morgan('dev', {stream: accessLogStream}));
+
+//validates the client-id and tenant-id
+app.use(errorHandler.validateClientId);
+app.use(errorHandler.validateTenantId);
 
 // Routes: configure your API routes here
-app.use('/', routes);
-app.use('/topic/*', topics);
+// The mocks are executed here, one in each file under /routes directory
+var topics = require('./routes/topics');
+app.use('/topic', topics);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+    return res.json(404, { "code": 404, "message": ""})
     var err = new Error('Not Found: ' + req.url);
     err.status = 404;
     next(err);

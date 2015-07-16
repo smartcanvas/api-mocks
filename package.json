@@ -17,8 +17,9 @@
   },
   "homepage": "https://github.com/smartcanvas/api-mocks",
   "dependencies": {
+    "body-parser": "~1.13.2",
     "express": "^4.13.1",
-    "morgan": "~1.6.1",
-    "body-parser": "~1.13.2"
+    "file-stream-rotator": "0.0.6",
+    "morgan": "~1.6.1"
   }
 }
